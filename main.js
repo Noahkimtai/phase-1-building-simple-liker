@@ -5,19 +5,22 @@ const FULL_HEART = '♥'
 // Your JavaScript code goes here!
 let errorMessage = document.getElementById('modal')
 let like = document.querySelectorAll('.like')
+let heart =document.querySelectorAll('.like-glyph')
+console.log(heart)
 function eventListener(){
-  for(let i = 0; i<like.length; i++){
-    like[i].addEventListener('click', handleClickEvent)
+  alert('You are connecting to the server')
+  for(let i = 0; i<heart.length; i++){
+    heart[i].addEventListener('click', handleClickEvent)
   }
 }
+mimicServerCall().then(eventListener()).catch(error =>displayError())
 
-
-function handleClickEvent(){
-  mimicServerCall().then(res =>{
-  let heart =like.querySelector('.like-glyph')
-  heart.innerText(FULL_HEART)
-  }).catch(error =>displayError())
-}
+function handleClickEvent(e){
+  console.log(e.target)
+  let likedHeart = e.target
+  likedHeart.innerText =FULL_HEART
+  likedHeart.style.color ='red'
+  }
 
 function displayError(){
   errorMessage.classList.remove('hidden')
